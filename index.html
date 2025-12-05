@@ -65,21 +65,33 @@
 
   <link rel="manifest" href="manifest.json">
   <style>
-    html,
     body {
-      height: 100%;
+      position: fixed;
+      /* Fixes viewport height issue on mobile */
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       width: 100%;
+      height: 100%;
       overflow: hidden;
-      /* Prevent scrolling on the body, let Flutter handle it */
       margin: 0;
       padding: 0;
       background-color: #121212;
-      /* Match app background */
+      touch-action: none;
+      /* Disables browser handling of gestures */
     }
   </style>
 </head>
 
 <body>
+  <script>
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        document.body.style.height = window.visualViewport.height + 'px';
+      });
+    }
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
